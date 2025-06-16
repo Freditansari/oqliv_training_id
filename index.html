@@ -80,14 +80,17 @@
       background-clip: text;
     }
 
-    /* Hero Section */
+    /* Hero Section - Responsive Two Columns */
     .hero {
       padding: 100px 0;
+      position: relative;
+    }
+
+    .hero-container {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 60px;
       align-items: center;
-      position: relative;
     }
 
     .hero-content h1 {
@@ -378,39 +381,34 @@
       background: rgba(15, 23, 42, 0.95);
       backdrop-filter: blur(20px);
     }
-    .hero-wrapper {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 60px;
-    }
 
-    .hero-content, .hero-video {
-      flex: 1;
-      min-width: 280px;
-    }
-
+    /* Mobile Responsive - Single Column */
     @media (max-width: 768px) {
-      .hero-wrapper {
-        flex-direction: column;
+      .hero-container {
+        grid-template-columns: 1fr;
         gap: 40px;
       }
 
-    /* Responsive Design */
-    @media (max-width: 768px) {
       .hero {
-        grid-template-columns: 1fr;
-        gap: 40px;
         padding: 60px 0;
       }
 
       .hero-content h1 {
         font-size: 2.5rem;
+        text-align: center;
       }
 
       .hero-content p {
         font-size: 1.1rem;
+        text-align: center;
+      }
+
+      .hero-content {
+        text-align: center;
+      }
+
+      .hero-video iframe {
+        height: 250px;
       }
 
       .benefits-grid {
@@ -427,6 +425,25 @@
 
       .section-title {
         font-size: 2rem;
+      }
+
+      .floating-element {
+        display: none;
+      }
+    }
+
+    /* Tablet Responsive */
+    @media (max-width: 1024px) and (min-width: 769px) {
+      .hero-container {
+        gap: 40px;
+      }
+
+      .hero-content h1 {
+        font-size: 3rem;
+      }
+
+      .hero-video iframe {
+        height: 280px;
       }
     }
 
@@ -453,19 +470,22 @@
 
   <!-- Hero Section -->
   <section class="hero">
- <div class="container hero-wrapper">
-      <div class="hero-content fade-in">
-        <h1>Mau Belajar Saham Amerika Tanpa Ribet?</h1>
-        <p>Gak perlu pusing baca chart. Di program ini, kamu akan belajar dasar-dasar saham & options market Amerika — sambil langsung pantau strategi real-time dari portofolio live kami.</p>
-        <a href="https://wa.me/62811814123" class="cta-button">
-          <i class="fab fa-whatsapp"></i>
-          Daftar Program & Dapet Akses 1 Tahun
-        </a>
+    <div class="container">
+      <div class="hero-container">
+        <div class="hero-content fade-in">
+          <h1>Mau Belajar Saham Amerika Tanpa Ribet?</h1>
+          <p>Gak perlu pusing baca chart. Di program ini, kamu akan belajar dasar-dasar saham & options market Amerika — sambil langsung pantau strategi real-time dari portofolio live kami.</p>
+          <a href="https://wa.me/62811814123" class="cta-button">
+            <i class="fab fa-whatsapp"></i>
+            Daftar Program & Dapet Akses 1 Tahun
+          </a>
+        </div>
+        <div class="hero-video fade-in">
+          <iframe src="https://www.youtube.com/embed/hnw2OZdAwFU" title="YouTube video" allowfullscreen></iframe>
+        </div>
       </div>
-      <div class="hero-video fade-in">
-        <iframe src="https://www.youtube.com/embed/hnw2OZdAwFU" title="YouTube video" allowfullscreen></iframe>
-      </div>
-    </div>    
+    </div>
+    
     <!-- Floating Elements -->
     <div class="floating-element">
       <i class="fas fa-chart-line" style="font-size: 4rem;"></i>
