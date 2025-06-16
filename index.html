@@ -4,123 +4,614 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Belajar Saham Amerika - Oqliv</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    body {
-      font-family: 'Inter', sans-serif;
+    * {
       margin: 0;
       padding: 0;
-      background-color: #f9fafb;
-      color: #111827;
+      box-sizing: border-box;
     }
+
+    :root {
+      --primary-gradient: linear-gradient(135deg, #1e3a8a 0%, #3730a3 50%, #7c3aed 100%);
+      --secondary-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      --accent-gradient: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+      --glass-bg: rgba(15, 23, 42, 0.8);
+      --glass-border: rgba(148, 163, 184, 0.1);
+      --text-primary: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --text-accent: #60a5fa;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--secondary-gradient);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Animated background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.1) 0%, transparent 50%);
+      z-index: -1;
+      animation: backgroundShift 20s ease-in-out infinite;
+    }
+
+    @keyframes backgroundShift {
+      0%, 100% { transform: translateX(0) translateY(0); }
+      33% { transform: translateX(-30px) translateY(-30px); }
+      66% { transform: translateX(30px) translateY(30px); }
+    }
+
     .container {
       max-width: 1200px;
-      margin: auto;
-      padding: 40px 20px;
+      margin: 0 auto;
+      padding: 0 20px;
     }
+
+    /* Header */
+    .header {
+      padding: 20px 0;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Hero Section */
     .hero {
-      display: flex;
-      flex-wrap: wrap;
+      padding: 100px 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
       align-items: center;
-      justify-content: space-between;
-      gap: 32px;
-      margin-top: 48px;
+      position: relative;
     }
-    .hero-text, .hero-video {
-      flex: 1;
-      min-width: 280px;
-    }
-    .hero-text h1 {
-      font-size: 36px;
-      margin-bottom: 16px;
-    }
-    .hero-text p {
-      font-size: 18px;
+
+    .hero-content h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
       margin-bottom: 24px;
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.1;
     }
+
+    .hero-content p {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+      font-weight: 400;
+    }
+
     .cta-button {
-      background: #1d4ed8;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--primary-gradient);
       color: white;
-      padding: 14px 28px;
-      font-size: 16px;
-      font-weight: bold;
-      border-radius: 8px;
+      padding: 18px 32px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 16px;
       text-decoration: none;
-      display: inline-block;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(30, 58, 138, 0.3);
     }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 40px rgba(30, 58, 138, 0.4);
+    }
+
+    .hero-video {
+      position: relative;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border-radius: 24px;
+      padding: 20px;
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+    }
+
+    .hero-video iframe {
+      width: 100%;
+      height: 315px;
+      border-radius: 16px;
+      border: none;
+    }
+
+    /* Floating elements */
+    .floating-element {
+      position: absolute;
+      opacity: 0.1;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .floating-element:nth-child(1) {
+      top: 20%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .floating-element:nth-child(2) {
+      top: 60%;
+      right: 10%;
+      animation-delay: 2s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    /* Sections */
     .section {
-      margin-top: 64px;
+      padding: 80px 0;
+      position: relative;
     }
-    .section h2 {
-      font-size: 28px;
-      margin-bottom: 16px;
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 60px;
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-    .section p, .faq p {
-      font-size: 16px;
-      line-height: 1.6;
+
+    /* Pricing Card */
+    .pricing-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      max-width: 600px;
+      margin: 0 auto;
     }
-    .faq {
-      margin-top: 40px;
+
+    .pricing-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--primary-gradient);
     }
-    .faq-item {
-      margin-bottom: 24px;
+
+    .pricing-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
     }
-    .faq-item strong {
-      display: block;
+
+    .price {
+      font-size: 3rem;
+      font-weight: 800;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       margin-bottom: 8px;
+    }
+
+    .price-period {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      margin-bottom: 40px;
+    }
+
+    .features-list {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 40px;
+    }
+
+    .features-list li {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 12px 0;
+      font-size: 1.1rem;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+    }
+
+    .features-list li:last-child {
+      border-bottom: none;
+    }
+
+    .check-icon {
+      color: #10b981;
+      font-size: 1.25rem;
+    }
+
+    /* Benefits Grid */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 60px;
+    }
+
+    .benefit-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 30px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .benefit-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--accent-gradient);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .benefit-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .benefit-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .benefit-icon {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .benefit-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--text-primary);
+    }
+
+    .benefit-description {
+      color: var(--text-secondary);
+      font-size: 1rem;
+    }
+
+    /* FAQ Section */
+    .faq-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      margin-bottom: 20px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .faq-question {
+      padding: 24px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+
+    .faq-question:hover {
+      background: rgba(148, 163, 184, 0.05);
+    }
+
+    .faq-answer {
+      padding: 0 24px;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      color: var(--text-secondary);
+    }
+
+    .faq-answer.active {
+      max-height: 200px;
+      padding: 0 24px 24px 24px;
+    }
+
+    .faq-icon {
+      transition: transform 0.3s ease;
+      color: var(--text-accent);
+    }
+
+    .faq-icon.active {
+      transform: rotate(180deg);
+    }
+
+    /* Footer */
+    .footer {
+      padding: 40px 0;
+      text-align: center;
+      border-top: 1px solid var(--glass-border);
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(20px);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 60px 0;
+      }
+
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero-content p {
+        font-size: 1.1rem;
+      }
+
+      .benefits-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pricing-card {
+        margin: 0 20px;
+      }
+
+      .section {
+        padding: 60px 0;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+    }
+
+    /* Scroll animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="hero">
-      <div class="hero-text">
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="logo">Oqliv</div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content fade-in">
         <h1>Mau Belajar Saham Amerika Tanpa Ribet?</h1>
         <p>Gak perlu pusing baca chart. Di program ini, kamu akan belajar dasar-dasar saham & options market Amerika — sambil langsung pantau strategi real-time dari portofolio live kami.</p>
-        <a class="cta-button" href="https://wa.me/62811814123">Daftar Program & Dapet Akses 1 Tahun</a>
+        <a href="https://wa.me/62811814123" class="cta-button">
+          <i class="fab fa-whatsapp"></i>
+          Daftar Program & Dapet Akses 1 Tahun
+        </a>
       </div>
-      <div class="hero-video">
-        <iframe width="100%" height="315" src="https://www.youtube.com/embed/hnw2OZdAwFU" title="YouTube video" frameborder="0" allowfullscreen></iframe>
+      <div class="hero-video fade-in">
+        <iframe src="https://www.youtube.com/embed/hnw2OZdAwFU" title="YouTube video" allowfullscreen></iframe>
       </div>
     </div>
+    
+    <!-- Floating Elements -->
+    <div class="floating-element">
+      <i class="fas fa-chart-line" style="font-size: 4rem;"></i>
+    </div>
+    <div class="floating-element">
+      <i class="fas fa-dollar-sign" style="font-size: 3rem;"></i>
+    </div>
+  </section>
 
-    <div class="section">
-      <h2>Program Belajar & Update Saham AS</h2>
-      <p><strong>IDR 5.000.000 / tahun</strong></p>
-      <ul>
-        <li>✅ Kursus Dasar Saham & Options Amerika</li>
-        <li>✅ Update Portofolio Mingguan</li>
-        <li>✅ Analisa Real-Time dari Pergerakan Institusi</li>
-        <li>✅ Akses Komunitas Premium</li>
-      </ul>
-      <p><a class="cta-button" href="https://wa.me/62811814123">Langganan via WhatsApp</a></p>
+  <!-- Pricing Section -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title fade-in">Program Belajar & Update Saham AS</h2>
+      <div class="pricing-card fade-in">
+        <div class="price">IDR 5.000.000</div>
+        <div class="price-period">per tahun</div>
+        <ul class="features-list">
+          <li>
+            <i class="fas fa-check-circle check-icon"></i>
+            Kursus Dasar Saham & Options Amerika
+          </li>
+          <li>
+            <i class="fas fa-check-circle check-icon"></i>
+            Update Portofolio Mingguan
+          </li>
+          <li>
+            <i class="fas fa-check-circle check-icon"></i>
+            Analisa Real-Time dari Pergerakan Institusi
+          </li>
+          <li>
+            <i class="fas fa-check-circle check-icon"></i>
+            Akses Komunitas Premium
+          </li>
+        </ul>
+        <a href="https://wa.me/62811814123" class="cta-button">
+          <i class="fab fa-whatsapp"></i>
+          Langganan via WhatsApp
+        </a>
+      </div>
     </div>
+  </section>
 
-    <div class="section">
-      <h2>Apa yang Kamu Dapetin?</h2>
-      <ul>
-        <li>📘 <strong>Basic Training:</strong> Belajar cara kerja pasar saham & options AS dari nol</li>
-        <li>🧠 <strong>Real Insight:</strong> Update portofolio mingguan dari trader berpengalaman</li>
-        <li>🔔 <strong>Alert Otomatis:</strong> Notifikasi saat ada sinyal institusi</li>
-        <li>💬 <strong>Komunitas Diskusi:</strong> Nanya dan diskusi bareng member lainnya</li>
-      </ul>
+  <!-- Benefits Section -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title fade-in">Apa yang Kamu Dapetin?</h2>
+      <div class="benefits-grid">
+        <div class="benefit-card fade-in">
+          <div class="benefit-icon">
+            <i class="fas fa-graduation-cap"></i>
+          </div>
+          <h3 class="benefit-title">Basic Training</h3>
+          <p class="benefit-description">Belajar cara kerja pasar saham & options AS dari nol</p>
+        </div>
+        <div class="benefit-card fade-in">
+          <div class="benefit-icon">
+            <i class="fas fa-brain"></i>
+          </div>
+          <h3 class="benefit-title">Real Insight</h3>
+          <p class="benefit-description">Update portofolio mingguan dari trader berpengalaman</p>
+        </div>
+        <div class="benefit-card fade-in">
+          <div class="benefit-icon">
+            <i class="fas fa-bell"></i>
+          </div>
+          <h3 class="benefit-title">Alert Otomatis</h3>
+          <p class="benefit-description">Notifikasi saat ada sinyal institusi</p>
+        </div>
+        <div class="benefit-card fade-in">
+          <div class="benefit-icon">
+            <i class="fas fa-comments"></i>
+          </div>
+          <h3 class="benefit-title">Komunitas Diskusi</h3>
+          <p class="benefit-description">Nanya dan diskusi bareng member lainnya</p>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="faq section">
-      <h2>FAQ</h2>
-      <div class="faq-item">
-        <strong>Saya gaptek soal saham. Aman?</strong>
-        <p>Aman banget. Ini dibuat untuk pemula yang sibuk tapi pengen ngerti pasar AS.</p>
-      </div>
-      <div class="faq-item">
-        <strong>Apakah ini sinyal beli jual?</strong>
-        <p>Bukan. Ini insight — biar kamu ngerti logika di balik keputusan, bukan cuma ikut-ikutan.</p>
-      </div>
-      <div class="faq-item">
-        <strong>Ada support langsung?</strong>
-        <p>Ada. Kamu bisa tanya langsung lewat WA atau diskusi bareng di komunitas.</p>
+  <!-- FAQ Section -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title fade-in">FAQ</h2>
+      <div class="faq-container">
+        <div class="faq-item fade-in">
+          <div class="faq-question" onclick="toggleFaq(0)">
+            <span>Saya gaptek soal saham. Aman?</span>
+            <i class="fas fa-chevron-down faq-icon" id="icon-0"></i>
+          </div>
+          <div class="faq-answer" id="answer-0">
+            <p>Aman banget. Ini dibuat untuk pemula yang sibuk tapi pengen ngerti pasar AS.</p>
+          </div>
+        </div>
+        <div class="faq-item fade-in">
+          <div class="faq-question" onclick="toggleFaq(1)">
+            <span>Apakah ini sinyal beli jual?</span>
+            <i class="fas fa-chevron-down faq-icon" id="icon-1"></i>
+          </div>
+          <div class="faq-answer" id="answer-1">
+            <p>Bukan. Ini insight — biar kamu ngerti logika di balik keputusan, bukan cuma ikut-ikutan.</p>
+          </div>
+        </div>
+        <div class="faq-item fade-in">
+          <div class="faq-question" onclick="toggleFaq(2)">
+            <span>Ada support langsung?</span>
+            <i class="fas fa-chevron-down faq-icon" id="icon-2"></i>
+          </div>
+          <div class="faq-answer" id="answer-2">
+            <p>Ada. Kamu bisa tanya langsung lewat WA atau diskusi bareng di komunitas.</p>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2024 Oqliv. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // FAQ Toggle Function
+    function toggleFaq(index) {
+      const answer = document.getElementById(`answer-${index}`);
+      const icon = document.getElementById(`icon-${index}`);
+      
+      answer.classList.toggle('active');
+      icon.classList.toggle('active');
+    }
+
+    // Scroll Animation
+    function handleScrollAnimation() {
+      const elements = document.querySelectorAll('.fade-in');
+      
+      elements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        
+        if (elementTop < windowHeight * 0.8) {
+          element.classList.add('visible');
+        }
+      });
+    }
+
+    // Initialize scroll animations
+    window.addEventListener('scroll', handleScrollAnimation);
+    window.addEventListener('load', handleScrollAnimation);
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
 </body>
 </html>
