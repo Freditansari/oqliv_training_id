@@ -378,6 +378,24 @@
       background: rgba(15, 23, 42, 0.95);
       backdrop-filter: blur(20px);
     }
+    .hero-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 60px;
+    }
+
+    .hero-content, .hero-video {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    @media (max-width: 768px) {
+      .hero-wrapper {
+        flex-direction: column;
+        gap: 40px;
+      }
 
     /* Responsive Design */
     @media (max-width: 768px) {
@@ -435,7 +453,7 @@
 
   <!-- Hero Section -->
   <section class="hero">
-    <div class="container">
+ <div class="container hero-wrapper">
       <div class="hero-content fade-in">
         <h1>Mau Belajar Saham Amerika Tanpa Ribet?</h1>
         <p>Gak perlu pusing baca chart. Di program ini, kamu akan belajar dasar-dasar saham & options market Amerika — sambil langsung pantau strategi real-time dari portofolio live kami.</p>
@@ -447,8 +465,7 @@
       <div class="hero-video fade-in">
         <iframe src="https://www.youtube.com/embed/hnw2OZdAwFU" title="YouTube video" allowfullscreen></iframe>
       </div>
-    </div>
-    
+    </div>    
     <!-- Floating Elements -->
     <div class="floating-element">
       <i class="fas fa-chart-line" style="font-size: 4rem;"></i>
